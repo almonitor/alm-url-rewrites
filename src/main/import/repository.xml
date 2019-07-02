@@ -19,7 +19,7 @@
                              jcr:primaryType="jnt:folder">
                                 <META-INF jcr:mixinTypes="jmix:hasExternalProviderExtension jmix:sourceControl"
                                jcr:primaryType="jnt:metaInfFolder">
-                                    <urlrewrite.xml jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:xmlFile"/>
+                                    <urlrewrite.xml jcr:primaryType="jnt:xmlFile"/>
                                 </META-INF>
                             </resources>
                         </main>
