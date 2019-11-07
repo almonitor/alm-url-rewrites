@@ -10,7 +10,7 @@
                 <sources jcr:mixinTypes="jmix:hasExternalProviderExtension jmix:sourceControl"
                   jcr:primaryType="jnt:moduleVersionFolder"
                   j:staticMountPointProviderKey="module-alm-url-rewrites-1.0-SNAPSHOT">
-                    <pom.xml jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:xmlFile"/>
+                    <pom.xml jcr:primaryType="jnt:xmlFile"/>
                     <src jcr:mixinTypes="jmix:hasExternalProviderExtension jmix:sourceControl"
                  jcr:primaryType="jnt:folder">
                         <main jcr:mixinTypes="jmix:hasExternalProviderExtension jmix:sourceControl"
@@ -19,7 +19,7 @@
                              jcr:primaryType="jnt:folder">
                                 <META-INF jcr:mixinTypes="jmix:hasExternalProviderExtension jmix:sourceControl"
                                jcr:primaryType="jnt:metaInfFolder">
-                                    <urlrewrite.xml jcr:primaryType="jnt:xmlFile"/>
+                                    <urlrewrite.xml jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:xmlFile"/>
                                 </META-INF>
                             </resources>
                         </main>

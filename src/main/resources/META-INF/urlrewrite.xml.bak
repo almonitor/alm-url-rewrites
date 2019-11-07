@@ -43,7 +43,7 @@
         <condition type="request-uri" operator="notequal">^/(cms/)?[a-z]{2}(_[A-Z]{2})?/.*</condition>
         <condition type="attribute" name="vanityUrlTargetPath" operator="equal">^$</condition>
         <from>^/cms/(.*)$</from>
-        <to>/cms/en/$1</to>
+        <to>/cms/%{attribute:siteDefaultLanguage}/$1</to>
     </rule>
 
     <rule>
@@ -54,7 +54,7 @@
         <condition type="request-uri" operator="notequal">^(/[\p{Alnum}\-_]*)/(cms/)?[a-z]{2}(_[A-Z]{2})?/.*</condition>
         <condition type="attribute" name="vanityUrlTargetPath" operator="equal">^$</condition>
         <from>^/cms/(.*)$</from>
-        <to>/cms/en/$1</to>
+        <to>/cms/%{attribute:siteDefaultLanguage}/$1</to>
     </rule>
 
     <rule>
@@ -104,19 +104,6 @@
         <from>^/cms/(.*)/almonitor/originals/(.*)$</from>
         <to>/cms/$1/almonitor/contents/articles/originals/$2</to>
     </rule>
-
-        <!-- *********************************** -->
-        <!-- ***    WORK IN PROGRESS HERE    *** -->
-        <!-- *********************************** -->
-    <rule>
-        <condition type="attribute" name="jahiaSkipInboundSeoRules" operator="notequal">^true$</condition>
-        <name>Add the /contents/articles part for Originals</name>
-        <from>^/cms/(.*)/almonitor2020/originals/(.*)$</from>
-        <to>/cms/$1/almonitor/contents/articles/originals/$2</to>
-    </rule>
-
-  
-  
     <rule>
         <condition type="attribute" name="jahiaSkipInboundSeoRules" operator="notequal">^true$</condition>
         <name>Add the /contents/articles part for opinion</name>
@@ -190,19 +177,6 @@
         </note>
         <condition type="attribute" name="jahiaSiteKeyMatchesCurrentServerName" operator="equal">^true$</condition>
         <condition type="attribute" name="jahiaSeoServernameForLink" operator="equal">^$</condition>
-        <from>^(/[\p{Alnum}\-_]*)?/cms/render/live/en/sites/([\p{Alnum}\-_]+)(/.*)?$</from>
-        <to>$1%{attribute:jahiaSeoCmsToken}%{attribute:jahiaSeoLanguageToken}$3</to>
-    </outbound-rule>
-  
-  
-    <outbound-rule>
-        <name>Handle link to a resource of same site</name>
-        <note>
-            Removes the site key from the URL if the current server name is mapped to this site.
-            Removes the language token if it is the default language of the site.
-        </note>
-        <condition type="attribute" name="jahiaSiteKeyMatchesCurrentServerName" operator="equal">^true$</condition>
-        <condition type="attribute" name="jahiaSeoServernameForLink" operator="equal">^$</condition>
         <from>^(/[\p{Alnum}\-_]*)?/cms/render/live/([a-zA-Z_]{2,5})/sites/([\p{Alnum}\-_]+)(/.*)?$</from>
         <to>$1%{attribute:jahiaSeoCmsToken}%{attribute:jahiaSeoLanguageToken}$4</to>
     </outbound-rule>
@@ -219,7 +193,7 @@
         <from>^(/[\p{Alnum}\-_]*)?/cms/render/live/([a-zA-Z_]{2,5})/sites/([\p{Alnum}\-_]+)(/.*)?$</from>
         <to>$1%{attribute:jahiaSeoCmsToken}%{attribute:jahiaSeoLanguageToken}/sites/$3$4</to>
     </outbound-rule>
-  
+
     <outbound-rule>
         <name>Handles link to a resource of another site: switch hostname</name>
         <note>
@@ -232,28 +206,8 @@
         <from>^(/[\p{Alnum}\-_]*)?/cms/render/live/([a-zA-Z_]{2,5})/sites/([\p{Alnum}\-_]+)(/.*)?$</from>
         <to>$1%{attribute:jahiaSeoCmsToken}%{attribute:jahiaSeoLanguageToken}$4</to>
     </outbound-rule>
-    
-  
-  
-  <!-- Outbound rules, ALM customizations -->
-        <!-- *********************************** -->
-        <!-- ***    WORK IN PROGRESS HERE    *** -->
-        <!-- *********************************** -->
-  <!--
-      <outbound-rule>
-        <name>Append servername</name>
-        <note>Check if we need to add server name</note>
-        <from>^(((?!//).)*)$</from>
-        <to>%{scheme}://%{server-name}:%{port}$1</to>
-      </outbound-rule>
-    <outbound-rule>
-        <name>Changes the hostname to dev2 if path contains /contents/articles</name>
-      <from>^(/[\p{Alnum}\-_]*)?/contents/articles/(.*)$</from>
-      <to>%{scheme}://%{server-name}:%{port}$1/contents/articles/$2</to>
-    </outbound-rule>
--->
 
-  
+  <!-- Outbound rules, ALM customizations -->
     <outbound-rule>
         <name>Remove the /contents/articles part in Originals</name>
         <from>^(/[\p{Alnum}\-_]*)?/contents/articles/originals/(.*)$</from>
